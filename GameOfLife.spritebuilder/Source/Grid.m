@@ -125,7 +125,7 @@ static const int GRID_COLUMNS = 10;
 }
 
 -(void)updateCreatures {
-    __block NSInteger aliveCount = 0;
+    __block int aliveCount = 0;
     [_gridArray enumerateObjectsUsingBlock:^(id colArray, NSUInteger idx, BOOL *stop) {
         [colArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             Creature *currentCreature = (Creature*)obj;
