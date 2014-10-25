@@ -125,26 +125,26 @@ static const int GRID_COLUMNS = 10;
 }
 
 -(void)updateCreatures {
-    __block int aliveRowCount = 0;
-    [_gridArray enumerateObjectsUsingBlock:^(id colArray, NSUInteger idx, BOOL *stop) {
-        __block int aliveColumnCount = 0;
-        [colArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            Creature *currentCreature = (Creature*)obj;
+    int aliveCount = 0;
+    for (int i = 0; i < [_gridArray count]; i++) {
+        // iterate through all the columns for a given row
+        for (int j = 0; j < [_gridArray[i] count]; j++) {
+            // access the creature in the cell that corresponds to the current row/column
+            Creature *currentCreature = _gridArray[i][j];
             switch (currentCreature.livingNeighbors) {
                 case 3:
                     currentCreature.isAlive = YES;
                 case 2:
-                    aliveColumnCount++;
+                    aliveCount++;
                     break;
                     
                 default:
                     currentCreature.isAlive = NO;
                     break;
             }
-        }];
-        aliveRowCount += aliveColumnCount;
-    }];
-    _totalAlive = aliveRowCount;
+        }
+    }
+    _totalAlive = aliveCount;
 }
 
 -(BOOL)isIndexValidForX:(int)x andY:(int)y {
