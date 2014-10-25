@@ -136,6 +136,7 @@ static const int GRID_COLUMNS = 10;
                     currentCreature.isAlive = YES;
                 case 2:
                     aliveCount++;
+                    NSLog(@"Alive at row:%i and col:%i", i, j);
                     break;
                     
                 default:
